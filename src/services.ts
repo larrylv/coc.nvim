@@ -8,6 +8,7 @@ import events from './events'
 import { Executable, ForkOptions, LanguageClient, LanguageClientOptions, RevealOutputChannelOn, ServerOptions, State, Transport, TransportKind } from './language-client'
 import { createLogger } from './logger'
 import { disposeAll, wait } from './util'
+import { StatusBarItem } from './model/status'
 import { toArray } from './util/array'
 import { fs, net, path } from './util/node'
 import { toObject } from './util/object'
@@ -284,6 +285,7 @@ class ServiceManager implements Disposable {
     if (this.registered.has(id)) return Disposable.create(() => {})
     if (client && typeof client.dispose === 'function') disposables.push(client)
     let created = false
+    let stateStatusItem = window.createStatusBarItem(-1, { progress: false })
     let service: IServiceProvider = {
       id,
       client,
@@ -313,6 +315,8 @@ class ServiceManager implements Disposable {
             service.state = convertState(newState)
             let oldStr = stateString(oldState)
             let newStr = stateString(newState)
+            stateStatusItem.text = `${client.name}:${newStr}`
+            stateStatusItem.show()
             logger.info(`LanguageClient ${client.name} state change: ${oldStr} => ${newStr}`)
           }, null, disposables)
         }
