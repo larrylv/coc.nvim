@@ -489,7 +489,7 @@ export default class Documents implements Disposable {
       let promise = new Promise<TextEdit[] | undefined>(resolve => {
         const willSaveHandlerTimeout = this.config.willSaveHandlerTimeout
         let timer = setTimeout(() => {
-          this.nvim.outWriteLine(`Will save handler timeout after ${willSaveHandlerTimeout}ms`)
+          // this.nvim.outWriteLine(`Will save handler timeout after ${willSaveHandlerTimeout}ms`)
           resolve(undefined)
         }, willSaveHandlerTimeout)
         let i = 0

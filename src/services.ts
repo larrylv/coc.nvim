@@ -330,8 +330,8 @@ class ServiceManager implements Disposable {
             onDidServiceReady.fire(void 0)
           }
         } catch (e) {
-          void window.showErrorMessage(`Server ${id} failed to start: ${e}`)
-          logger.error(`Server ${id} failed to start:`, e)
+          // void window.showErrorMessage(`Server ${id} failed to start: ${e}`)
+          // logger.error(`Server ${id} failed to start:`, e)
           service.state = ServiceStat.StartFailed
         }
       },

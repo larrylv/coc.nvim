@@ -302,7 +302,7 @@ function! coc#client#stop(name) abort
     return 0
   endif
   call s:on_exit(a:name, 0)
-  echohl MoreMsg | echom 'client '.a:name.' stopped!' | echohl None
+  " echohl MoreMsg | echom 'client '.a:name.' stopped!' | echohl None
   return 1
 endfunction
 

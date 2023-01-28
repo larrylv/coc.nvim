@@ -77,7 +77,7 @@ export class DefaultErrorHandler implements ErrorHandler {
     } else {
       let diff = this.restarts[this.restarts.length - 1] - this.restarts[0]
       if (diff <= this.milliseconds) {
-        console.error(`The "${this.name}" server crashed ${this.maxRestartCount} times in the last 3 minutes. The server will not be restarted.`)
+        // console.error(`The "${this.name}" server crashed ${this.maxRestartCount} times in the last 3 minutes. The server will not be restarted.`)
         return CloseAction.DoNotRestart
       } else {
         this.restarts.shift()

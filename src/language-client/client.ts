@@ -836,7 +836,7 @@ export abstract class BaseLanguageClient implements FeatureClient<Middleware, La
       resolve()
     } catch (error) {
       this.$state = ClientState.StartFailed
-      this.error(`${this._name} client: couldn't create connection to server.`, error, 'force')
+      // this.error(`${this._name} client: couldn't create connection to server.`, error, 'force')
       reject(error)
     }
     return this._onStart
@@ -1095,9 +1095,9 @@ export abstract class BaseLanguageClient implements FeatureClient<Middleware, La
           cb(item && item.id === 'retry')
         })
       } else {
-        void window.showErrorMessage(toText(error.message))
-        this.error('Server initialization failed.', error)
-        logger.error(`Server ${this.id} initialization failed.`, error)
+        // void window.showErrorMessage(toText(error.message))
+        // this.error('Server initialization failed.', error)
+        // logger.error(`Server ${this.id} initialization failed.`, error)
         cb(false)
       }
       throw error
@@ -1258,7 +1258,7 @@ export abstract class BaseLanguageClient implements FeatureClient<Middleware, La
     }
     this._connection = undefined
     if (action === CloseAction.DoNotRestart) {
-      this.error('Connection to server got closed. Server will not be restarted.', undefined, 'force')
+      // this.error('Connection to server got closed. Server will not be restarted.', undefined, 'force')
       this.cleanUp('stop')
       if (this.$state === ClientState.Starting) {
         this.$state = ClientState.StartFailed
@@ -1268,12 +1268,12 @@ export abstract class BaseLanguageClient implements FeatureClient<Middleware, La
       this._onStop = Promise.resolve()
       this._onStart = undefined
     } else if (action === CloseAction.Restart) {
-      this.info('Connection to server got closed. Server will restart.')
+      // this.info('Connection to server got closed. Server will restart.')
       this.cleanUp('restart')
       this.$state = ClientState.Initial
       this._onStop = Promise.resolve()
       this._onStart = undefined
-      this.start().catch(this.error.bind(this, `Restarting server failed`))
+      this.start().catch(() => {})
     }
   }
 
@@ -1286,8 +1286,8 @@ export abstract class BaseLanguageClient implements FeatureClient<Middleware, La
   public handleConnectionError(error: Error, message: Message, count: number) {
     let action = this._clientOptions.errorHandler!.error(error, message, count)
     if (action === ErrorAction.Shutdown) {
-      this.error(`Connection to server ${this._name} is erroring, ${error.message}. Shutting down server.`, error, 'force')
-      this.stop().catch(this.error.bind(this, `Stopping server failed`))
+      // this.error(`Connection to server ${this._name} is erroring, ${error.message}. Shutting down server.`, error, 'force')
+      this.stop().catch(() => {})
     }
   }
 

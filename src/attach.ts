@@ -38,8 +38,8 @@ export default (opts: Attach, requestApi = false): Plugin => {
     disposable.dispose()
     for (let [method, args] of pendingNotifications) {
       plugin.cocAction(method, ...args).catch(e => {
-        console.error(`Error on notification "${method}": ${e}`)
-        logger.error(`Error on notification ${method}`, e)
+        // console.error(`Error on notification "${method}": ${e}`)
+        // logger.error(`Error on notification ${method}`, e)
       })
     }
     pendingNotifications = []
