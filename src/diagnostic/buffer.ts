@@ -216,7 +216,7 @@ export class DiagnosticBuffer implements SyncItem {
         end_col: range.end.character,
         type: getSeverityType(o.severity)
       }
-    })
+    }).filter(o => !(/resolves but is not exported from `PackageRoot`/).test(o.text))
     this.nvim.call(aleMethod, [this.bufnr, 'coc' + collection, aleItems], true)
   }
 
