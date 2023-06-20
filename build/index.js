@@ -72310,7 +72310,7 @@ var init_manager5 = __esm({
         let exports2;
         let ext;
         let subscriptions = [];
-        const timing = createTiming(`activate ${id}`, 5e3);
+        const timing = createTiming(`activate ${id}`, 1e4);
         let extension = {
           activate: () => {
             if (result)
