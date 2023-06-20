@@ -442,7 +442,7 @@ export class ExtensionManager {
     let exports: any
     let ext: ExtensionExport
     let subscriptions: Disposable[] = []
-    const timing = createTiming(`activate ${id}`, 5000)
+    const timing = createTiming(`activate ${id}`, 10000)
     let extension: Extension<API> = {
       activate: (): Promise<API> => {
         if (result) return result
